@@ -1,0 +1,41 @@
+{
+  "name": "ShoppingItem",
+  "type": "object",
+  "description": "Shopping list line with multi-recipe cross-reference",
+  "properties": {
+    "ingredient": {
+      "type": "string",
+      "description": "Ingredient name"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Quantity amount"
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit of measure"
+    },
+    "recipe_names": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Recipes that use this ingredient"
+    },
+    "recipe_keys": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Recipe keys for pairing logic"
+    },
+    "checked": {
+      "type": "boolean",
+      "default": false,
+      "description": "Checked off the list"
+    }
+  },
+  "required": ["ingredient"],
+  "rls": {
+    "create": true,
+    "read": { "created_by": "{{user.email}}" },
+    "update": { "created_by": "{{user.email}}" },
+    "delete": { "created_by": "{{user.email}}" }
+  }
+}

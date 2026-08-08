@@ -1,0 +1,11 @@
+{
+  "name": "Idellicious",
+  "description": "Culinary companion — recipe discovery, meal prep, and waste-smart shopping",
+  "visibility": "public",
+  "site": {
+    "installCommand": "npm install",
+    "buildCommand": "npm run build",
+    "serveCommand": "npm run dev",
+    "outputDirectory": "./dist"
+  }
+}

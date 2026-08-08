@@ -1,0 +1,23 @@
+{
+  "name": "RecipePreference",
+  "type": "object",
+  "description": "User like/dislike for recipe feed personalization",
+  "properties": {
+    "recipe_key": {
+      "type": "string",
+      "description": "Stable key from local recipes catalog"
+    },
+    "preference": {
+      "type": "string",
+      "enum": ["liked", "disliked"],
+      "description": "User preference for this recipe"
+    }
+  },
+  "required": ["recipe_key", "preference"],
+  "rls": {
+    "create": true,
+    "read": { "created_by": "{{user.email}}" },
+    "update": { "created_by": "{{user.email}}" },
+    "delete": { "created_by": "{{user.email}}" }
+  }
+}
