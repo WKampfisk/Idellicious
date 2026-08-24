@@ -4,14 +4,14 @@ import { Image } from "@/components/ui/image";
 import { Button } from "@/components/ui/button";
 import { getRecipeById, scaleIngredients } from "@/data/recipes";
 import { containerNeeds, getRelatedRecipes } from "@/lib/ingredients";
-import { useIdellicious } from "@/hooks/useIdellicious";
+import { useGainGo } from "@/hooks/useGainGo";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 export default function RecipeDetail() {
   const { id } = useParams();
   const recipe = getRecipeById(id);
-  const { prefMap, like, dislike, addToShopping } = useIdellicious();
+  const { prefMap, like, dislike, addToShopping } = useGainGo();
   const [batch, setBatch] = useState(false);
 
   if (!recipe) {

@@ -1,5 +1,5 @@
 /**
- * Idellicious recipe catalog with Unsplash photography.
+ * GainGo recipe catalog with Unsplash photography.
  * recipe_key is stable for preferences & shopping cross-refs.
  */
 

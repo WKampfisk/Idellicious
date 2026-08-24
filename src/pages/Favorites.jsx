@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import RecipeCard from "@/components/RecipeCard";
-import { useIdellicious } from "@/hooks/useIdellicious";
+import { useGainGo } from "@/hooks/useGainGo";
 
 export default function Favorites() {
-  const { loading, favoriteRecipes, prefMap, like, dislike, addToShopping } = useIdellicious();
+  const { loading, favoriteRecipes, prefMap, like, dislike, addToShopping } = useGainGo();
 
   return (
     <div className="space-y-4">

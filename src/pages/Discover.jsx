@@ -1,8 +1,8 @@
 import RecipeCard from "@/components/RecipeCard";
-import { useIdellicious } from "@/hooks/useIdellicious";
+import { useGainGo } from "@/hooks/useGainGo";
 
 export default function Discover() {
-  const { loading, feedRecipes, prefMap, like, dislike, addToShopping } = useIdellicious();
+  const { loading, feedRecipes, prefMap, like, dislike, addToShopping } = useGainGo();
 
   return (
     <div className="space-y-4">

@@ -1,6 +1,6 @@
-# Idellicious
+# GainGo
 
-Culinary companion — recipe discovery, meal prep, and waste-smart shopping.
+Recipe discovery, meal prep, and waste-smart shopping.
 
 Built on [Base44](https://base44.com) with Vite, React, Tailwind CSS, and the Base44 SDK.
 
@@ -30,7 +30,7 @@ npx base44 login   # if needed
 npx base44 dev     # or npm run dev
 ```
 
-App is linked to Base44 project **Idellicious** (`base44/.app.jsonc`).
+The Base44 project is configured as **GainGo** in `base44/config.jsonc`.
 
 ## Deploy
 

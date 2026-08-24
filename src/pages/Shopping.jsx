@@ -1,8 +1,8 @@
 import ShoppingListView from "@/components/ShoppingList";
-import { useIdellicious } from "@/hooks/useIdellicious";
+import { useGainGo } from "@/hooks/useGainGo";
 
 export default function Shopping() {
-  const { loading, shopping, toggleShop, clearChecked } = useIdellicious();
+  const { loading, shopping, toggleShop, clearChecked } = useGainGo();
 
   return (
     <div className="space-y-4">

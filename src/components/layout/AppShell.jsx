@@ -15,12 +15,9 @@ export default function AppShell() {
         <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-lime-400 flex items-center justify-center text-white shadow-sm">
           <UtensilsCrossed className="w-5 h-5" aria-hidden />
         </div>
-        <div>
-          <p className="text-lg font-semibold tracking-tight text-emerald-950 leading-none">
-            Idellicious
-          </p>
-          <p className="text-[11px] text-emerald-700/70">Culinary companion</p>
-        </div>
+        <p className="text-lg font-semibold tracking-tight text-emerald-950 leading-none">
+          GainGo
+        </p>
       </header>
 
       <main className="flex-1 px-4 py-4 pb-28">

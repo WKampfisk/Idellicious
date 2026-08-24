@@ -3,12 +3,22 @@ import { base44 } from "@/api/base44Client";
 const Pref = () => base44.entities.RecipePreference;
 const Shop = () => base44.entities.ShoppingItem;
 
-const LOCAL_PREF = "idellicious_prefs_v1";
-const LOCAL_SHOP = "idellicious_shop_v1";
+const LOCAL_PREF = "gaingo_prefs_v1";
+const LOCAL_SHOP = "gaingo_shop_v1";
+const LEGACY_LOCAL_PREF = "idellicious_prefs_v1";
+const LEGACY_LOCAL_SHOP = "idellicious_shop_v1";
 
-function readLocal(key, fallback) {
+function readLocal(key, fallback, legacyKey) {
   try {
-    return JSON.parse(localStorage.getItem(key) || "null") ?? fallback;
+    const current = localStorage.getItem(key);
+    if (current !== null) return JSON.parse(current) ?? fallback;
+
+    const legacy = legacyKey ? localStorage.getItem(legacyKey) : null;
+    if (legacy === null) return fallback;
+
+    const migrated = JSON.parse(legacy) ?? fallback;
+    writeLocal(key, migrated);
+    return migrated;
   } catch {
     return fallback;
   }
@@ -36,7 +46,7 @@ export async function listPreferences() {
       console.warn("pref list failed", e);
     }
   }
-  return readLocal(LOCAL_PREF, []);
+  return readLocal(LOCAL_PREF, [], LEGACY_LOCAL_PREF);
 }
 
 export async function setPreference(recipe_key, preference) {
@@ -52,7 +62,7 @@ export async function setPreference(recipe_key, preference) {
       console.warn("pref write failed, local fallback", e);
     }
   }
-  const list = readLocal(LOCAL_PREF, []);
+  const list = readLocal(LOCAL_PREF, [], LEGACY_LOCAL_PREF);
   const i = list.findIndex((p) => p.recipe_key === recipe_key);
   const row = { id: `local_${recipe_key}`, recipe_key, preference };
   if (i >= 0) list[i] = row;
@@ -70,7 +80,7 @@ export async function listShopping() {
       console.warn("shop list failed", e);
     }
   }
-  return readLocal(LOCAL_SHOP, []);
+  return readLocal(LOCAL_SHOP, [], LEGACY_LOCAL_SHOP);
 }
 
 export async function replaceShoppingFromMerge(mergedLines) {
@@ -108,7 +118,7 @@ export async function replaceShoppingFromMerge(mergedLines) {
     }
   }
   writeLocal(LOCAL_SHOP, mergedLines.map((l, i) => ({ ...l, id: l.id || `local_shop_${i}` })));
-  return readLocal(LOCAL_SHOP, []);
+  return readLocal(LOCAL_SHOP, [], LEGACY_LOCAL_SHOP);
 }
 
 export async function updateShoppingItem(id, patch) {
@@ -120,7 +130,9 @@ export async function updateShoppingItem(id, patch) {
       console.warn(e);
     }
   }
-  const list = readLocal(LOCAL_SHOP, []).map((x) => (x.id === id ? { ...x, ...patch } : x));
+  const list = readLocal(LOCAL_SHOP, [], LEGACY_LOCAL_SHOP).map((x) =>
+    x.id === id ? { ...x, ...patch } : x
+  );
   writeLocal(LOCAL_SHOP, list);
   return list.find((x) => x.id === id);
 }
@@ -136,7 +148,7 @@ export async function clearCheckedShopping() {
       console.warn(e);
     }
   }
-  const list = readLocal(LOCAL_SHOP, []).filter((x) => !x.checked);
+  const list = readLocal(LOCAL_SHOP, [], LEGACY_LOCAL_SHOP).filter((x) => !x.checked);
   writeLocal(LOCAL_SHOP, list);
   return list;
 }

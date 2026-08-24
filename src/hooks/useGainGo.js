@@ -7,11 +7,11 @@ import {
   saveFullShoppingList,
   setPreference,
   updateShoppingItem,
-} from "@/lib/idelliciousApi";
+} from "@/lib/gainGoApi";
 import { getRelatedRecipes, mergeIngredientsIntoLines } from "@/lib/ingredients";
 import { RECIPES } from "@/data/recipes";
 
-export function useIdellicious() {
+export function useGainGo() {
   const [prefs, setPrefs] = useState([]);
   const [shopping, setShopping] = useState([]);
   const [loading, setLoading] = useState(true);
